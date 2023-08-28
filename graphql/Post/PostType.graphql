@@ -1,0 +1,9 @@
+type Post{
+    id: Int
+    author_id: String
+    title: String
+    content: String
+    status: Int
+    created_at: DateTime
+    updated_at: DateTime
+}

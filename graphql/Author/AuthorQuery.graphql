@@ -1,0 +1,25 @@
+input SortOption {
+  field: String
+  order: SortOrder
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+extend type Query{
+    allAuthors: [Author!]! @all
+
+    "List multiple users."
+    authors(
+      "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
+      author_name: String @where(operator: "like")
+      orderBy: [SortOption!]! @orderBy
+    ): [Author!]! @paginate(defaultCount:10)
+
+    authorInfo(
+        id: ID @eq
+    ): Author! @find
+}
+

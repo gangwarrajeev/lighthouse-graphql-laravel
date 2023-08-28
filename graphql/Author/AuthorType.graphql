@@ -1,0 +1,22 @@
+input BookOrderByClause {
+    column: BookSortableColumn!
+    order: SortOrder!
+}
+enum BookSortableColumn {
+    title
+    content
+}
+enum SortOrder {
+    ASC
+    DESC
+}
+type Author{
+    id: Int
+    author_name: String
+    author_type: String
+    status: Int
+    created_at: DateTime
+    updated_at: DateTime
+    # posts(orderBy: [BookOrderByClause]): [Post!]! @hasMany
+   Posts(limit: Int, orderBy: String): [Post!]! @method(name: "Posts")
+}

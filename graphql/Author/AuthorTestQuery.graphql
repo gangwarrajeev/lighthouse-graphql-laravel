@@ -1,0 +1,17 @@
+extend type Query{
+    getAuthorOtherInformation: [CustomAuthor] @field(resolver: "App\\GraphQL\\Queries\\getAuthorOtherInformation@__invoke")
+}
+
+type CustomAuthor{
+    name: String
+    email: String
+    mobile: String
+    wifeName: String
+    AverageIncome: Float
+    PopularBooks: BookDetails
+}
+
+type BookDetails{
+    name: String
+    year_founded: String
+}

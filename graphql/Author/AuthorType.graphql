@@ -1,10 +1,14 @@
-input BookOrderByClause {
-    column: BookSortableColumn!
-    order: SortOrder!
-}
+# input BookOrderByClause {
+#     column: BookSortableColumn!
+#     order: SortOrder!
+# }
 enum BookSortableColumn {
     title
     content
+}
+input BookOrderByClause {
+    column: BookSortableColumn
+    order: SortOrder!
 }
 enum SortOrder {
     ASC
@@ -18,5 +22,5 @@ type Author{
     created_at: DateTime
     updated_at: DateTime
     # posts(orderBy: [BookOrderByClause]): [Post!]! @hasMany
-   Posts(limit: Int, orderBy: String): [Post!]! @method(name: "Posts")
+   Posts(limit: Int): [Post!]! @field(resolver: "App\\GraphQL\\Queries\\Posts@__invoke")
 }

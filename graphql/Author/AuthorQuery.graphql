@@ -1,6 +1,17 @@
 input SortOption {
-  field: String
+  # field: String
+  column: String!
   order: SortOrder
+}
+
+enum SortFields{
+  author_name
+  author_type
+}
+"Allowed column names for Query.posts.orderBy"
+enum QueryPostsOrderByColumn {
+  AUTHOR_NAME @enum(value: "author_name")
+  AUTHOR_TYPE @enum(value: "author_type")
 }
 
 enum SortOrder {
@@ -15,7 +26,9 @@ extend type Query{
     authors(
       "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
       author_name: String @where(operator: "like")
-      orderBy: [SortOption!]! @orderBy
+      # author_name: String @like(template: "% %")
+      # orderBy: [SortOption!]! @orderBy
+      orderBy: _ @orderBy(columnsEnum: "QueryPostsOrderByColumn")
     ): [Author!]! @paginate(defaultCount:10)
 
     authorInfo(

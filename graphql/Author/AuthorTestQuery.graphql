@@ -1,5 +1,9 @@
-extend type Query{
-    getAuthorOtherInformation: [CustomAuthor] @field(resolver: "App\\GraphQL\\Queries\\getAuthorOtherInformation@__invoke")
+extend type Query
+{
+    getAuthorOtherInformation(
+    author_name: String
+    author_email: String
+): [CustomAuthor] @field(resolver: "App\\GraphQL\\Queries\\getAuthorOtherInformation@__invoke")
 }
 
 type CustomAuthor{
@@ -8,10 +12,18 @@ type CustomAuthor{
     mobile: String
     wifeName: String
     AverageIncome: Float
-    PopularBooks: BookDetails
+    PopularBooks: BookDetails 
+    SettingName(settingSection: String) : SettingType @field(resolver: "App\\GraphQL\\Queries\\SettingName@__invoke")
+
 }
 
+type SettingType{
+    name: String
+    extra:String,
+    engagement: Boolean
+}
 type BookDetails{
     name: String
+    title: String
     year_founded: String
 }
